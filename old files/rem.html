@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Media Player Remote</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <link rel="stylesheet" href="default.css">
+
+
+        <!-- Latest compiled and minified CSS -->
+        <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+
+
+        <!-- Latest compiled and minified CSS -->
+        <!--<link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">-->
+
+        <!--<script src="javascript.js"></script>-->
+
+        <!-- Latest compiled and minified JavaScript -->
+        <script type="text/javascript" src="bootstrap/js/jquery-1.11.3.min.js"></script>
+
+        <script src="bootstrap/js/jquery.knob.js"></script>
+        <style type="text/css">
+            .btn-group{
+                margin-bottom: 10px;
+            }
+
+            canvas{
+                margin-left: 20px;
+            }
+            .btn{
+                border-radius: 20px;
+            }
+
+        </style>
+        <script>
+            var progPercent = localStorage.getItem("progPercent");
+        </script>
+
+    </head>
+
+    <body >
+
+
+
+        <div class="container">
+
+
+            <div class="row">
+                <div class="col-md-12">
+                    <br/>
+                </div>
+            </div>
+
+
+
+
+
+
+            <!--global form-->
+            <form action="[commandpath]" method="post">
+
+
+                <div class="row">
+
+                    <div class="col-md-12 align-center">
+
+                        <h3 id='song-name'>h3. Bootstrap heading</h3>
+                        <div class="progress">
+                            <script>
+                                document.write('<div id="seekerprog" class="progress-bar progress-bar-success" role="progressbar" style="width: ' + progPercent + '%;"> [positionstring]</div>');
+                            </script>
+
+                            <span style="padding-right: 5px;" id='song-length' class="pull-right">[durationstring]</span>
+                        </div>
+                    </div>
+
+                </div>
+
+
+
+                <div class="row">
+                    <div class="col-md-12 align-center">
+
+                        <div class="btn-group" role="group" aria-label="..." style="vertical-align: top;">
+
+                            <button style="padding: 15px 21px;
+                                    font-size: 30px;
+                                    line-height: 1.3333333;
+                                    border-radius: 35px;
+                                    border-top-right-radius: 0px ;"
+                                    id='playpause-btn' type="submit" name="[wmcname]" value="887" onclick="return postForm(887, 'null', 0);
+                                            return false;" class="btn btn-success btn-lg" ><i class="glyphicon glyphicon-play"></i></button>
+
+                            <button type="submit" name="[wmcname]" value="888" onclick="return postForm(890, 'null', 0);
+                                    return false;" class="btn btn-info btn-md"><i class="glyphicon glyphicon-stop"></i></button>
+                        </div>
+
+                        <div class="btn-group" role="group" aria-label="..." style="vertical-align: top;">
+                            <button type="submit" name="[wmcname]" value="919" onclick="return postForm(919, 'null', 0);
+                                    return false;" class="btn btn-default btn-sm"><i class="glyphicon glyphicon-step-backward"></i></button>
+                            <button type="submit" name="[wmcname]" value="901" onclick="return postForm(901, 'null', 0);
+                                    return false;" class="btn btn-default btn-sm"><i class="glyphicon glyphicon-backward"></i></button>
+                            <button type="submit" name="[wmcname]" value="902" onclick="return postForm(902, 'null', 0);
+                                    return false;" class="btn btn-default btn-sm"><i class="glyphicon glyphicon-forward"></i></button>
+                            <button type="submit" name="[wmcname]" value="920" onclick="return postForm(920, 'null', 0);
+                                    return false;" class="btn btn-default btn-sm"><i class="glyphicon glyphicon-step-forward"></i></button>
+                        </div>
+
+                        <div class="btn-group" style="vertical-align: top;">
+                            <button type="button" onclick="toggleBrowser()" class="btn btn-default btn-sm"><i class="glyphicon glyphicon-folder-open"></i></button>
+
+                        </div>
+
+                        <input type="text" value="75" class="dial">
+
+                        <div class="btn-group" role="group" aria-label="..." style="vertical-align: top; margin-left: -5px;">
+                            <button type="submit" name="[wmcname]" value="909" onclick="return postForm(909, 'null', 0);
+                                    return false;" class="btn btn-link btn-md"><i id='mute-state' class="glyphicon glyphicon-volume-off"></i></button>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12 align-center">
+                        <div class="btn-group" role="group" aria-label="..." style="vertical-align: top;">
+                            <button class="btn btn-link" type="button" onclick="toggleExtend()" ><i class="glyphicon glyphicon-th"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+            </form>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <!-- 4:3 aspect ratio -->
+                    <div id="favlist" class="embed-responsive embed-responsive-16by9" style="display: none;">
+                        <iframe class="embed-responsive-item" src="browser.html?path=D:\Music\Playlists\mpcplaylist"></iframe>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <!-- 4:3 aspect ratio -->
+                    <div id="extend" style="display: none;">
+
+                        Extra buttons here
+                    </div>
+                </div>
+            </div>
+
+
+        </div><!-- /.container -->
+        <form id="ef" action="[commandpath]" method="post">
+            <input id="fwmc" type="hidden" name="[wmcname]" value="-2">
+            <input id="fextra" type="hidden" name="extra" value="">
+        </form>
+
+
+        <!-- Latest compiled and minified JavaScript -->
+        <script src="bootstrap/js/bootstrap.min.js"></script>
+
+        <script>
+
+                                function postForm(wmc, ext, extv) {
+                                    document.getElementById("fwmc").value = wmc;
+                                    document.getElementById("fextra").value = extv;
+                                    document.getElementById("fextra").name = ext;
+                                    
+                                    $.ajax({
+                                        type: "POST",
+                                        url: "[commandpath]",
+                                        data: $("#ef").serialize(),
+                                        success: function(json) {
+                                            console.log('tessent');
+                                        }
+                                    });
+                                    return false;
+                                }
+
+
+
+                                function toggleBrowser() {
+
+                                    $("#favlist").toggle();
+
+                                }
+                                function toggleExtend() {
+
+                                    $("#extend").toggle();
+
+                                }
+                                $(function() {
+                                    $(".dial").knob({
+                                        "width": 100,
+                                        "height": 100,
+                                        "fgColor": "#66CC66",
+                                        "angleOffset": -125,
+                                        "angleArc": 250,
+                                        'release': function(v) {
+                                            //console.log(v);
+
+                                            $.ajax({
+                                                url: "command.html?wm_command=[setvolumecommand]&volume=" + v,
+                                                success: function(msg) {
+
+                                                }
+                                            });
+
+                                        }
+                                    });
+                                });
+
+
+
+                                function GetProgress() {
+
+                                    var statusRegExp = /OnStatus\("(.*)", "(.*)", (\d+), "(.*)", (\d+), "(.*)", (\d+), (\d+), "(.*)"\)/;
+
+                                    $.ajax({
+                                        url: "status.html",
+                                        success: function(msg) {
+
+                                            var params = statusRegExp.exec(msg);
+
+
+                                            var progPercent = (params[3] / params[5]) * 100;
+                                            progPercent = Math.floor(progPercent);
+
+                                            localStorage.setItem("progPercent", progPercent);
+
+                                            var status = params[2];//Paused, Playing;
+
+
+                                            if (status === 'Playing') {
+                                                // value="888" onclick="return postForm(887, 'null', 0); return false;
+
+                                                $("#playpause-btn i").attr("class", "glyphicon glyphicon-pause");
+                                                $("#playpause-btn").attr('value', '888');
+                                                $("#playpause-btn").attr('onclick', "return postForm(888, 'null', 0);");
+
+                                            } else if (status === 'Paused') {
+                                                // value="887" onclick="return postForm(887, 'null', 0); return false;
+
+                                                $("#playpause-btn").attr('value', '887');
+                                                $("#playpause-btn").attr('onclick', "return postForm(887, 'null', 0);");
+                                                $("#playpause-btn i").attr("class", "glyphicon glyphicon-play");
+                                            }
+
+
+
+                                            $('.dial').val(params[8]).trigger('change');
+
+                                            $("#song-name").html(params[1]);
+                                            $("#seekerprog").html(params[4]);
+                                            $("#song-length").html(params[6])
+                                            $("#seekerprog").css("width", "" + progPercent + "%");
+                                            $("#volumeprog").css("width", params[8] + "%");
+
+
+
+                                            //console.log(params);
+                                            setTimeout("GetProgress()", 1000);
+
+                                        }
+                                    });
+                                }
+
+                                clearTimeout(GetProgress());
+
+                                GetProgress();
+
+
+        </script>
+
+
+        [debug]
+    </body>
+
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Media Player Remote</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <link rel="stylesheet" href="default.css">
+
+
+        <!-- Latest compiled and minified CSS -->
+        <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+
+        <!-- Latest compiled and minified JavaScript -->
+        <script type="text/javascript" src="bootstrap/js/jquery-1.11.3.min.js"></script>
+
+        <!-- Latest compiled and minified JavaScript -->
+        <script src="bootstrap/js/bootstrap.min.js"></script>
+        
+        <style>
+            body{
+                font-size: 15px;
+            }
+            .dirname{
+                font-weight: bold;
+            }
+            
+        </style>
+
+    </head>
+    <body>
+        <div class="container">
+            <div class="row">
+                <table class="table table-responsive">
+                    <tr>
+                        <td class="align-center">
+                            <strong>Location: </strong>[currentdir]
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <span></span>
+            <div class="row">
+                <table class="table table-responsive">
+                    <tr>
+                        <th>Name</th>
+                        <th>Type</th>
+                        <th>Size</th>
+                        <th>Date Modified</th>
+                    </tr>
+                    [currentfiles]
+                </table>
+            </div>
+            [debug]
+        </div>
+
+    </body>
+</html>
